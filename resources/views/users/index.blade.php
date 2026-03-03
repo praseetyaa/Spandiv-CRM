@@ -60,7 +60,7 @@
                 </thead>
                 <tbody class="divide-y divide-gray-200 dark:divide-dark-700/30">
                     @forelse($users as $u)
-                        <tr class="table-row">
+                        <tr class="table-row table-row-animated">
                             <td class="px-6 py-4">
                                 <div class="flex items-center gap-3">
                                     <div

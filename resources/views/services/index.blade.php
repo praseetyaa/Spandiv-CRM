@@ -26,7 +26,7 @@
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         @forelse($services as $service)
             @php $catColor = ['website' => 'blue', 'branding' => 'purple', 'social_media' => 'amber', 'invitation' => 'emerald'][$service->category] ?? 'blue'; @endphp
-            <div class="glass rounded-2xl p-6 stat-card">
+            <div class="glass rounded-2xl p-6 stat-card card-hover card-glow">
                 <div class="flex items-start justify-between mb-4">
                     <span
                         class="px-2.5 py-1 text-xs rounded-lg bg-{{ $catColor }}-500/10 text-{{ $catColor }}-400 border border-{{ $catColor }}-500/20">{{ ucfirst(str_replace('_', ' ', $service->category)) }}</span>

@@ -49,7 +49,7 @@
                 </thead>
                 <tbody class="divide-y divide-gray-200 dark:divide-dark-700/30">
                     @forelse($clients as $client)
-                        <tr class="table-row">
+                        <tr class="table-row table-row-animated">
                             <td class="px-6 py-4">
                                 <p class="text-sm font-medium text-gray-900 dark:text-white">{{ $client->name }}</p>
                                 <p class="text-xs text-gray-500 dark:text-dark-400">{{ $client->email }}</p>

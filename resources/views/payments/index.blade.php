@@ -37,7 +37,7 @@
             </thead>
             <tbody class="divide-y divide-gray-200 dark:divide-dark-700/30">
                 @forelse($payments as $pay)
-                    <tr class="table-row">
+                    <tr class="table-row table-row-animated">
                         <td class="px-6 py-4 text-sm font-medium text-gray-900 dark:text-white">{{ $pay->invoice?->invoice_number ?? '-' }}</td>
                         <td class="px-6 py-4 text-sm text-gray-600 dark:text-dark-300">{{ $pay->invoice?->client?->name ?? '-' }}</td>
                         <td class="px-6 py-4 text-sm font-medium text-emerald-400">Rp

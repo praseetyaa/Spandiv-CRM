@@ -60,7 +60,7 @@
             <tbody class="divide-y divide-gray-200 dark:divide-dark-700/30">
                 @forelse($invoices as $inv)
                     @php $ic = ['paid' => 'emerald', 'partial' => 'amber', 'overdue' => 'red', 'sent' => 'blue', 'draft' => 'dark'][$inv->status] ?? 'dark'; @endphp
-                    <tr class="table-row">
+                    <tr class="table-row table-row-animated">
                         <td class="px-6 py-4">
                             <p class="text-sm font-medium text-gray-900 dark:text-white">{{ $inv->invoice_number }}</p>
                             <p class="text-xs text-gray-500 dark:text-dark-400">{{ $inv->issue_date->format('d M Y') }}</p>

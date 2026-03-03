@@ -44,7 +44,7 @@
             <tbody class="divide-y divide-gray-200 dark:divide-dark-700/30">
                 @forelse($subscriptions as $sub)
                     @php $subColor = ['active' => 'emerald', 'paused' => 'amber', 'cancelled' => 'red'][$sub->status]; @endphp
-                    <tr class="table-row">
+                    <tr class="table-row table-row-animated">
                         <td class="px-6 py-4 text-sm font-medium text-gray-900 dark:text-white">{{ $sub->client?->name ?? '-' }}</td>
                         <td class="px-6 py-4 text-sm text-gray-600 dark:text-dark-300">{{ $sub->service?->name ?? '-' }}</td>
                         <td class="px-6 py-4 text-sm text-emerald-400 font-medium">Rp

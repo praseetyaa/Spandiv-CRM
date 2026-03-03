@@ -33,7 +33,7 @@
                 </thead>
                 <tbody class="divide-y divide-gray-200 dark:divide-dark-700/30">
                     @forelse($companies as $company)
-                        <tr class="table-row">
+                        <tr class="table-row table-row-animated">
                             <td class="px-6 py-4">
                                 <div class="flex items-center gap-3">
                                     <div class="w-10 h-10 bg-gradient-to-br from-blue-500 to-purple-500 rounded-xl flex items-center justify-center text-white font-bold text-sm">

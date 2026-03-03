@@ -78,7 +78,7 @@
                 </thead>
                 <tbody class="divide-y divide-gray-200 dark:divide-dark-700/30">
                     @forelse($leads as $lead)
-                        <tr class="table-row">
+                        <tr class="table-row table-row-animated">
                             <td class="px-6 py-4">
                                 <div>
                                     <p class="text-sm font-medium text-gray-900 dark:text-white">{{ $lead->name }}</p>
