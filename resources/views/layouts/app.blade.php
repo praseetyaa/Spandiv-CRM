@@ -8,44 +8,7 @@
     <title>@yield('title', 'Dashboard') — Spandiv CRM</title>
     <meta name="description" content="Spandiv CRM - Internal CRM for Digital Agency">
 
-    <!-- Tailwind CSS v4 CDN -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            darkMode: 'class',
-            theme: {
-                extend: {
-                    colors: {
-                        brand: {
-                            50: '#eff6ff',
-                            100: '#dbeafe',
-                            200: '#bfdbfe',
-                            300: '#93c5fd',
-                            400: '#60a5fa',
-                            500: '#3b82f6',
-                            600: '#2563eb',
-                            700: '#1d4ed8',
-                            800: '#1e40af',
-                            900: '#1e3a8a',
-                        },
-                        dark: {
-                            50: '#f8fafc',
-                            100: '#f1f5f9',
-                            200: '#e2e8f0',
-                            300: '#cbd5e1',
-                            400: '#94a3b8',
-                            500: '#64748b',
-                            600: '#475569',
-                            700: '#334155',
-                            800: '#1e293b',
-                            900: '#0f172a',
-                            950: '#020617',
-                        }
-                    }
-                }
-            }
-        }
-    </script>
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
 
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -351,7 +314,8 @@
                 </div>
                 <div>
                     <h3 class="text-lg font-semibold text-white">Konfirmasi Hapus</h3>
-                    <p class="text-sm text-dark-400">Apakah Anda yakin ingin menghapus data ini? Tindakan ini tidak dapat dibatalkan.</p>
+                    <p class="text-sm text-dark-400">Apakah Anda yakin ingin menghapus data ini? Tindakan ini tidak
+                        dapat dibatalkan.</p>
                 </div>
             </div>
             <div class="flex justify-end gap-3 mt-6">
@@ -406,7 +370,7 @@
         }
 
         // Close modal on Escape key
-        document.addEventListener('keydown', function(e) {
+        document.addEventListener('keydown', function (e) {
             if (e.key === 'Escape') closeDeleteModal();
         });
     </script>
