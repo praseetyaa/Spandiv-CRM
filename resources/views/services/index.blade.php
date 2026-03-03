@@ -18,6 +18,7 @@
                     <option value="{{ $val }}" {{ request('category') == $val ? 'selected' : '' }}>{{ $lbl }}</option>
                 @endforeach
             </select>
+            @include('partials.company-filter')
             <button type="submit"
                 class="px-4 py-2 bg-gray-200 dark:bg-dark-700 hover:bg-gray-300 dark:hover:bg-dark-600 text-gray-700 dark:text-white text-sm rounded-xl transition-colors">Filter</button>
         </form>
@@ -33,6 +34,9 @@
                         class="px-2.5 py-1 text-xs rounded-lg {{ $service->billing_type == 'recurring' ? 'bg-cyan-500/10 text-cyan-400' : 'bg-gray-200 dark:bg-dark-600 text-gray-500 dark:text-dark-400' }}">{{ $service->billing_type == 'recurring' ? '🔁 Recurring' : 'One Time' }}</span>
                 </div>
                 <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-2">{{ $service->name }}</h3>
+                @if(auth()->user()->isSuperAdmin() && $service->company)
+                    <p class="text-[11px] font-medium text-purple-500 dark:text-purple-400 mb-1">🏢 {{ $service->company->name }}</p>
+                @endif
                 <p class="text-2xl font-bold text-emerald-400 mb-4">Rp
                     {{ number_format($service->base_price, 0, ',', '.') }}<span
                         class="text-sm text-dark-400 font-normal">{{ $service->billing_type == 'recurring' ? '/bulan' : '' }}</span>

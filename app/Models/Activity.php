@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class Activity extends Model
 {
     use HasFactory;
+    use \App\Traits\BelongsToCompany;
 
     protected $fillable = [
         'user_id',

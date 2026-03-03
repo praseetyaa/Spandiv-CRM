@@ -11,10 +11,13 @@ class PaymentController extends Controller
 {
     public function index(Request $request)
     {
-        $query = Payment::with(['invoice.client']);
+        $query = Payment::with(['invoice.client', 'company']);
 
         if ($request->filled('method')) {
             $query->where('method', $request->method);
+        }
+        if ($request->filled('company_id') && auth()->user()->isSuperAdmin()) {
+            $query->where('company_id', $request->company_id);
         }
 
         $payments = $query->latest()->paginate(15);

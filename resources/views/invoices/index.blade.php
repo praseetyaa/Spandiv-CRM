@@ -4,7 +4,8 @@
 @section('header-actions')
     <div class="flex gap-3">
         <form method="POST" action="{{ route('invoices.generate-recurring') }}">
-            @csrf<button type="submit"
+            @csrf
+            <button type="submit"
                 class="px-4 py-2 bg-emerald-600 hover:bg-emerald-500 text-white text-sm font-medium rounded-xl transition-colors flex items-center gap-2"
                 onclick="return confirm('Generate invoice recurring untuk semua subscription aktif?')">
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -31,6 +32,7 @@
                 @foreach(['draft' => 'Draft', 'sent' => 'Sent', 'partial' => 'Partial', 'paid' => 'Paid', 'overdue' => 'Overdue'] as $v => $l)
                 <option value="{{ $v }}" {{ request('status') == $v ? 'selected' : '' }}>{{ $l }}</option>@endforeach
             </select>
+            @include('partials.company-filter')
             <button type="submit"
                 class="px-4 py-2 bg-gray-200 dark:bg-dark-700 hover:bg-gray-300 dark:hover:bg-dark-600 text-gray-700 dark:text-white text-sm rounded-xl transition-colors">Filter</button>
         </form>
@@ -39,14 +41,20 @@
         <table class="w-full">
             <thead>
                 <tr class="border-b border-gray-200 dark:border-dark-700/50">
-                    <th class="text-left text-xs font-medium text-gray-500 dark:text-dark-400 uppercase px-6 py-4">Invoice</th>
-                    <th class="text-left text-xs font-medium text-gray-500 dark:text-dark-400 uppercase px-6 py-4">Client</th>
+                    <th class="text-left text-xs font-medium text-gray-500 dark:text-dark-400 uppercase px-6 py-4">Invoice
+                    </th>
+                    <th class="text-left text-xs font-medium text-gray-500 dark:text-dark-400 uppercase px-6 py-4">Client
+                    </th>
                     <th class="text-left text-xs font-medium text-gray-500 dark:text-dark-400 uppercase px-6 py-4">Tipe</th>
-                    <th class="text-left text-xs font-medium text-gray-500 dark:text-dark-400 uppercase px-6 py-4">Total</th>
-                    <th class="text-left text-xs font-medium text-gray-500 dark:text-dark-400 uppercase px-6 py-4">Terbayar</th>
-                    <th class="text-left text-xs font-medium text-gray-500 dark:text-dark-400 uppercase px-6 py-4">Status</th>
+                    <th class="text-left text-xs font-medium text-gray-500 dark:text-dark-400 uppercase px-6 py-4">Total
+                    </th>
+                    <th class="text-left text-xs font-medium text-gray-500 dark:text-dark-400 uppercase px-6 py-4">Terbayar
+                    </th>
+                    <th class="text-left text-xs font-medium text-gray-500 dark:text-dark-400 uppercase px-6 py-4">Status
+                    </th>
                     <th class="text-left text-xs font-medium text-gray-500 dark:text-dark-400 uppercase px-6 py-4">Due</th>
-                    <th class="text-right text-xs font-medium text-gray-500 dark:text-dark-400 uppercase px-6 py-4">Aksi</th>
+                    <th class="text-right text-xs font-medium text-gray-500 dark:text-dark-400 uppercase px-6 py-4">Aksi
+                    </th>
                 </tr>
             </thead>
             <tbody class="divide-y divide-gray-200 dark:divide-dark-700/30">
@@ -57,12 +65,13 @@
                             <p class="text-sm font-medium text-gray-900 dark:text-white">{{ $inv->invoice_number }}</p>
                             <p class="text-xs text-gray-500 dark:text-dark-400">{{ $inv->issue_date->format('d M Y') }}</p>
                         </td>
-                        <td class="px-6 py-4 text-sm text-gray-600 dark:text-dark-300">{{ $inv->client->name }}</td>
+                        <td class="px-6 py-4 text-sm text-gray-600 dark:text-dark-300">{{ $inv->client?->name ?? '-' }}</td>
                         <td class="px-6 py-4"><span
                                 class="text-xs {{ $inv->subscription_id ? 'text-cyan-400' : 'text-dark-400' }}">{{ $inv->subscription_id ? '🔁 Recurring' : '📋 One Time' }}</span>
                         </td>
                         <td class="px-6 py-4 text-sm text-gray-900 dark:text-white font-medium">Rp
-                            {{ number_format($inv->total_amount, 0, ',', '.') }}</td>
+                            {{ number_format($inv->total_amount, 0, ',', '.') }}
+                        </td>
                         <td class="px-6 py-4 text-sm text-emerald-400">Rp {{ number_format($inv->paid_amount, 0, ',', '.') }}
                         </td>
                         <td class="px-6 py-4"><span
@@ -70,12 +79,13 @@
                         </td>
                         <td
                             class="px-6 py-4 text-sm {{ $inv->due_date < now() && $inv->status !== 'paid' ? 'text-red-400' : 'text-dark-300' }}">
-                            {{ $inv->due_date->format('d M Y') }}</td>
+                            {{ $inv->due_date->format('d M Y') }}
+                        </td>
                         <td class="px-6 py-4 text-right">
                             <div class="flex items-center justify-end gap-2">
                                 <a href="{{ route('invoices.show', $inv) }}"
-                                    class="p-1.5 text-gray-400 dark:text-dark-400 hover:text-blue-400"><svg class="w-4 h-4" fill="none"
-                                        stroke="currentColor" viewBox="0 0 24 24">
+                                    class="p-1.5 text-gray-400 dark:text-dark-400 hover:text-blue-400"><svg class="w-4 h-4"
+                                        fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                             d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -84,7 +94,8 @@
                                 @if($inv->status !== 'paid')<a href="{{ route('payments.create', ['invoice_id' => $inv->id]) }}"
                                 class="px-3 py-1.5 text-xs rounded-lg bg-emerald-500/10 text-emerald-400 hover:bg-emerald-500/20 transition-colors">Bayar</a>@endif
                                 <button type="button" onclick="confirmDelete('{{ route('invoices.destroy', $inv) }}')"
-                                    class="p-1.5 text-gray-400 dark:text-dark-400 hover:text-red-400 transition-colors" title="Hapus">
+                                    class="p-1.5 text-gray-400 dark:text-dark-400 hover:text-red-400 transition-colors"
+                                    title="Hapus">
                                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                             d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
@@ -99,6 +110,7 @@
             </tbody>
         </table>
         @if($invoices->hasPages())
-        <div class="px-6 py-4 border-t border-gray-200 dark:border-dark-700/50">{{ $invoices->withQueryString()->links() }}</div>@endif
+            <div class="px-6 py-4 border-t border-gray-200 dark:border-dark-700/50">{{ $invoices->withQueryString()->links() }}
+        </div>@endif
     </div>
 @endsection

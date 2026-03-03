@@ -9,6 +9,8 @@ class ServiceSeeder extends Seeder
 {
     public function run(): void
     {
+        $companyId = \App\Models\Company::first()?->id;
+
         $services = [
             [
                 'name' => 'Website Company Profile',
@@ -83,7 +85,7 @@ class ServiceSeeder extends Seeder
         ];
 
         foreach ($services as $service) {
-            Service::create($service);
+            Service::create(array_merge($service, ['company_id' => $companyId]));
         }
     }
 }

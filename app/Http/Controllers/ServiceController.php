@@ -10,10 +10,13 @@ class ServiceController extends Controller
 {
     public function index(Request $request)
     {
-        $query = Service::withCount(['leads', 'projects', 'subscriptions']);
+        $query = Service::with('company')->withCount(['leads', 'projects', 'subscriptions']);
 
         if ($request->filled('category')) {
             $query->where('category', $request->category);
+        }
+        if ($request->filled('company_id') && auth()->user()->isSuperAdmin()) {
+            $query->where('company_id', $request->company_id);
         }
 
         $services = $query->latest()->paginate(15);

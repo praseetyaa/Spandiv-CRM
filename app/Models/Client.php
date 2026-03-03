@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class Client extends Model
 {
     use HasFactory;
+    use \App\Traits\BelongsToCompany;
 
     protected $fillable = [
         'name',

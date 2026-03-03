@@ -13,13 +13,16 @@ class ProjectController extends Controller
 {
     public function index(Request $request)
     {
-        $query = Project::with(['client', 'service']);
+        $query = Project::with(['client', 'service', 'company']);
 
         if ($request->filled('status')) {
             $query->where('status', $request->status);
         }
         if ($request->filled('search')) {
             $query->where('title', 'like', "%{$request->search}%");
+        }
+        if ($request->filled('company_id') && auth()->user()->isSuperAdmin()) {
+            $query->where('company_id', $request->company_id);
         }
 
         $projects = $query->latest()->paginate(15);

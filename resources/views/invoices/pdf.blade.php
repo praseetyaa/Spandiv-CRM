@@ -326,11 +326,11 @@
         {{-- Header --}}
         <div class="header">
             <div class="header-left">
-                <div class="company-name">⚡ Spandiv Digital Solutions</div>
-                <div class="company-subtitle">Digital Agency & Creative Studio</div>
+                <div class="company-name">{{ $invoice->company?->name ?? 'My Company' }}</div>
+                <div class="company-subtitle">{{ $invoice->company?->address ?? '' }}</div>
                 <div class="company-info">
-                    Indonesia<br>
-                    hello@spandiv.com
+                    {{ $invoice->company?->phone ?? '' }}<br>
+                    {{ $invoice->company?->email ?? '' }}
                 </div>
             </div>
             <div class="header-right">
@@ -457,8 +457,8 @@
 
         {{-- Footer --}}
         <div class="footer">
-            Invoice ini dibuat secara digital oleh Spandiv CRM dan sah tanpa tanda tangan.<br>
-            &copy; {{ date('Y') }} Spandiv Digital Solutions. All rights reserved.
+            Invoice ini dibuat secara digital dan sah tanpa tanda tangan.<br>
+            &copy; {{ date('Y') }} {{ $invoice->company?->name ?? 'My Company' }}. All rights reserved.
         </div>
     </div>
 </body>

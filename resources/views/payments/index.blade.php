@@ -9,6 +9,20 @@
         </svg>Catat Pembayaran</a>
 @endsection
 @section('content')
+    <div class="glass rounded-2xl p-4 mb-6">
+        <form method="GET" class="flex flex-wrap gap-3 items-center">
+            <select name="method"
+                class="px-4 py-2 bg-gray-100 dark:bg-dark-800/50 border border-gray-300 dark:border-dark-600/50 rounded-xl text-gray-900 dark:text-white text-sm focus:ring-2 focus:ring-blue-500/50 focus:outline-none">
+                <option value="">Semua Metode</option>
+                @foreach(['transfer' => 'Transfer', 'cash' => 'Cash', 'e-wallet' => 'E-Wallet'] as $v => $l)
+                <option value="{{ $v }}" {{ request('method') == $v ? 'selected' : '' }}>{{ $l }}</option>
+                @endforeach
+            </select>
+            @include('partials.company-filter')
+            <button type="submit"
+                class="px-4 py-2 bg-gray-200 dark:bg-dark-700 hover:bg-gray-300 dark:hover:bg-dark-600 text-gray-700 dark:text-white text-sm rounded-xl transition-colors">Filter</button>
+        </form>
+    </div>
     <div class="glass rounded-2xl overflow-hidden">
         <table class="w-full">
             <thead>
@@ -24,8 +38,8 @@
             <tbody class="divide-y divide-gray-200 dark:divide-dark-700/30">
                 @forelse($payments as $pay)
                     <tr class="table-row">
-                        <td class="px-6 py-4 text-sm font-medium text-gray-900 dark:text-white">{{ $pay->invoice->invoice_number }}</td>
-                        <td class="px-6 py-4 text-sm text-gray-600 dark:text-dark-300">{{ $pay->invoice->client->name ?? '-' }}</td>
+                        <td class="px-6 py-4 text-sm font-medium text-gray-900 dark:text-white">{{ $pay->invoice?->invoice_number ?? '-' }}</td>
+                        <td class="px-6 py-4 text-sm text-gray-600 dark:text-dark-300">{{ $pay->invoice?->client?->name ?? '-' }}</td>
                         <td class="px-6 py-4 text-sm font-medium text-emerald-400">Rp
                             {{ number_format($pay->amount, 0, ',', '.') }}</td>
                         <td class="px-6 py-4">

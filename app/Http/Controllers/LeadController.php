@@ -15,7 +15,7 @@ class LeadController extends Controller
 
     public function index(Request $request)
     {
-        $query = Lead::with('service');
+        $query = Lead::with(['service', 'company']);
 
         if ($request->filled('status')) {
             $query->where('status', $request->status);
@@ -29,6 +29,9 @@ class LeadController extends Controller
         }
         if ($request->filled('urgency')) {
             $query->where('urgency_level', $request->urgency);
+        }
+        if ($request->filled('company_id') && auth()->user()->isSuperAdmin()) {
+            $query->where('company_id', $request->company_id);
         }
 
         $leads = $query->latest()->paginate(15);

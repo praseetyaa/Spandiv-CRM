@@ -19,7 +19,7 @@ class InvoiceController extends Controller
 
     public function index(Request $request)
     {
-        $query = Invoice::with(['client', 'project', 'subscription']);
+        $query = Invoice::with(['client', 'project', 'subscription', 'company']);
 
         if ($request->filled('status')) {
             $query->where('status', $request->status);
@@ -31,6 +31,9 @@ class InvoiceController extends Controller
                         $q2->where('name', 'like', "%{$request->search}%");
                     });
             });
+        }
+        if ($request->filled('company_id') && auth()->user()->isSuperAdmin()) {
+            $query->where('company_id', $request->company_id);
         }
 
         $invoices = $query->latest()->paginate(15);
@@ -74,7 +77,7 @@ class InvoiceController extends Controller
 
     public function show(Invoice $invoice)
     {
-        $invoice->load(['client', 'project', 'subscription', 'payments', 'items']);
+        $invoice->load(['client', 'project', 'subscription', 'payments', 'items', 'company']);
         return view('invoices.show', compact('invoice'));
     }
 
@@ -126,7 +129,7 @@ class InvoiceController extends Controller
 
     public function downloadPdf(Invoice $invoice)
     {
-        $invoice->load(['client', 'project', 'subscription', 'items']);
+        $invoice->load(['client', 'project', 'subscription', 'items', 'company']);
 
         $pdf = Pdf::loadView('invoices.pdf', compact('invoice'))
             ->setPaper('a4', 'portrait');

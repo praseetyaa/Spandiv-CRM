@@ -12,10 +12,13 @@ class SubscriptionController extends Controller
 {
     public function index(Request $request)
     {
-        $query = Subscription::with(['client', 'service']);
+        $query = Subscription::with(['client', 'service', 'company']);
 
         if ($request->filled('status')) {
             $query->where('status', $request->status);
+        }
+        if ($request->filled('company_id') && auth()->user()->isSuperAdmin()) {
+            $query->where('company_id', $request->company_id);
         }
 
         $subscriptions = $query->latest()->paginate(15);

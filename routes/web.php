@@ -11,6 +11,8 @@ use App\Http\Controllers\SubscriptionController;
 use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\ActivityController;
+use App\Http\Controllers\CompanyController;
+use App\Http\Controllers\UserController;
 
 // Auth Routes
 Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
@@ -56,4 +58,14 @@ Route::middleware('auth')->group(function () {
 
     // Activities
     Route::get('/activities', [ActivityController::class, 'index'])->name('activities.index');
+
+    // User Management (admin & superadmin)
+    Route::middleware('role:superadmin,admin')->group(function () {
+        Route::resource('users', UserController::class)->except(['show']);
+    });
+
+    // Company Management (superadmin only)
+    Route::middleware('role:superadmin')->group(function () {
+        Route::resource('companies', CompanyController::class)->except(['show']);
+    });
 });

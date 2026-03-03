@@ -10,7 +10,7 @@ class ClientController extends Controller
 {
     public function index(Request $request)
     {
-        $query = Client::query();
+        $query = Client::with('company');
 
         if ($request->filled('search')) {
             $query->where(function ($q) use ($request) {
@@ -24,6 +24,9 @@ class ClientController extends Controller
         }
         if ($request->filled('industry')) {
             $query->where('industry', $request->industry);
+        }
+        if ($request->filled('company_id') && auth()->user()->isSuperAdmin()) {
+            $query->where('company_id', $request->company_id);
         }
 
         $clients = $query->withCount(['projects', 'subscriptions', 'invoices'])

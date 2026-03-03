@@ -34,11 +34,11 @@
                                 </svg>
                             </div>
                             <div>
-                                <h2 class="text-lg font-bold text-white">Spandiv Digital Solutions</h2>
-                                <p class="text-xs text-dark-300">Digital Agency & Creative Studio</p>
+                                <h2 class="text-lg font-bold text-white">{{ $invoice->company?->name ?? 'My Company' }}</h2>
+                                <p class="text-xs text-dark-300">{{ $invoice->company?->address ?? '' }}</p>
                             </div>
                         </div>
-                        <p class="text-xs text-gray-500 dark:text-dark-400 leading-relaxed">Indonesia<br>hello@spandiv.com</p>
+                        <p class="text-xs text-gray-500 dark:text-dark-400 leading-relaxed">{{ $invoice->company?->phone ?? '' }}<br>{{ $invoice->company?->email ?? '' }}</p>
                     </div>
                     <div class="text-right">
                         <h1 class="text-3xl font-bold gradient-text mb-2">INVOICE</h1>

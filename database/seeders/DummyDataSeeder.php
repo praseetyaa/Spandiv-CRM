@@ -15,6 +15,9 @@ class DummyDataSeeder extends Seeder
 {
     public function run(): void
     {
+        // Assign all dummy data to the first company (PT Contoh Digital)
+        $companyId = \App\Models\Company::first()?->id;
+
         // Create Leads
         $leads = [
             ['name' => 'Budi Santoso', 'phone' => '081234567890', 'email' => 'budi@example.com', 'source' => 'instagram', 'service_id' => 1, 'estimated_value' => 5000000, 'urgency_level' => 'medium', 'lead_score' => 45, 'status' => 'closed_won', 'notes' => 'Tertarik website company profile'],
@@ -28,7 +31,7 @@ class DummyDataSeeder extends Seeder
         ];
 
         foreach ($leads as $leadData) {
-            Lead::create($leadData);
+            Lead::create(array_merge($leadData, ['company_id' => $companyId]));
         }
 
         // Create Clients (from won leads)
@@ -41,7 +44,7 @@ class DummyDataSeeder extends Seeder
         ];
 
         foreach ($clients as $clientData) {
-            Client::create($clientData);
+            Client::create(array_merge($clientData, ['company_id' => $companyId]));
         }
 
         // Create Projects
@@ -53,7 +56,7 @@ class DummyDataSeeder extends Seeder
         ];
 
         foreach ($projects as $projectData) {
-            $project = Project::create($projectData);
+            $project = Project::create(array_merge($projectData, ['company_id' => $companyId]));
 
             // Add milestones for each project
             if ($project->id === 1) {
@@ -72,7 +75,7 @@ class DummyDataSeeder extends Seeder
         ];
 
         foreach ($subscriptions as $subData) {
-            Subscription::create($subData);
+            Subscription::create(array_merge($subData, ['company_id' => $companyId]));
         }
 
         // Create Invoices
@@ -86,7 +89,7 @@ class DummyDataSeeder extends Seeder
         ];
 
         foreach ($invoices as $invData) {
-            Invoice::create($invData);
+            Invoice::create(array_merge($invData, ['company_id' => $companyId]));
         }
 
         // Create Payments
@@ -98,7 +101,7 @@ class DummyDataSeeder extends Seeder
         ];
 
         foreach ($payments as $payData) {
-            Payment::create($payData);
+            Payment::create(array_merge($payData, ['company_id' => $companyId]));
         }
     }
 }

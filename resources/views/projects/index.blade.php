@@ -20,6 +20,7 @@
                     <option value="{{ $v }}" {{ request('status') == $v ? 'selected' : '' }}>{{ $l }}</option>
                 @endforeach
             </select>
+            @include('partials.company-filter')
             <button type="submit"
                 class="px-4 py-2 bg-gray-200 dark:bg-dark-700 hover:bg-gray-300 dark:hover:bg-dark-600 text-gray-700 dark:text-white text-sm rounded-xl transition-colors">Filter</button>
         </form>
