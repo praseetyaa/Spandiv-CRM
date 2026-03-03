@@ -13,7 +13,8 @@ use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\ActivityController;
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\UserController;
-
+use App\Http\Controllers\SystemSettingController;
+use App\Http\Controllers\SystemUpdateController;
 // Auth Routes
 Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [LoginController::class, 'login']);
@@ -67,5 +68,16 @@ Route::middleware('auth')->group(function () {
     // Company Management (superadmin only)
     Route::middleware('role:superadmin')->group(function () {
         Route::resource('companies', CompanyController::class)->except(['show']);
+
+        // System Settings
+        Route::get('system-settings', [SystemSettingController::class, 'index'])->name('system-settings.index');
+        Route::post('system-settings', [SystemSettingController::class, 'update'])->name('system-settings.update');
+        Route::post('system-settings/test-email', [SystemSettingController::class, 'testEmail'])->name('system-settings.test-email');
+        Route::post('system-settings/maintenance', [SystemSettingController::class, 'toggleMaintenance'])->name('system-settings.maintenance');
+        Route::post('system-settings/backup', [SystemSettingController::class, 'runBackup'])->name('system-settings.backup');
+
+        // System Update
+        Route::get('system-update', [SystemUpdateController::class, 'index'])->name('system-update.index');
+        Route::post('system-update/run', [SystemUpdateController::class, 'runUpdate'])->name('system-update.run');
     });
 });
