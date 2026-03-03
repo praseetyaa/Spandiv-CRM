@@ -6,59 +6,59 @@
         <div class="glass rounded-2xl p-8 mb-6">
             <div class="flex items-start justify-between mb-6">
                 <div>
-                    <h3 class="text-xl font-bold text-white">{{ $lead->name }}</h3>
+                    <h3 class="text-xl font-bold text-gray-900 dark:text-white">{{ $lead->name }}</h3>
                     <p class="text-dark-400 text-sm mt-1">{{ $lead->phone }} · {{ $lead->email ?? 'No email' }}</p>
                 </div>
                 <div class="flex items-center gap-2">
                     <a href="{{ route('leads.edit', $lead) }}"
-                        class="px-4 py-2 bg-dark-700 hover:bg-dark-600 text-white text-sm rounded-xl transition-colors">Edit</a>
+                        class="px-4 py-2 bg-gray-200 dark:bg-dark-700 hover:bg-gray-300 dark:hover:bg-dark-600 text-gray-700 dark:text-white text-sm rounded-xl transition-colors">Edit</a>
                     <a href="{{ route('leads.index') }}"
-                        class="px-4 py-2 text-dark-400 hover:text-white text-sm transition-colors">← Kembali</a>
+                        class="px-4 py-2 text-gray-400 dark:text-gray-500 dark:text-dark-400 hover:text-gray-900 dark:hover:text-white text-sm transition-colors">← Kembali</a>
                 </div>
             </div>
 
             <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-                <div class="bg-dark-800/50 rounded-xl p-4">
-                    <p class="text-xs text-dark-400 mb-1">Status</p>
-                    <p class="text-sm font-medium text-white">{{ ucfirst(str_replace('_', ' ', $lead->status)) }}</p>
+                <div class="bg-gray-100 dark:bg-dark-800/50 rounded-xl p-4">
+                    <p class="text-xs text-gray-500 dark:text-dark-400 mb-1">Status</p>
+                    <p class="text-sm font-medium text-gray-900 dark:text-white">{{ ucfirst(str_replace('_', ' ', $lead->status)) }}</p>
                 </div>
-                <div class="bg-dark-800/50 rounded-xl p-4">
-                    <p class="text-xs text-dark-400 mb-1">Urgency</p>
+                <div class="bg-gray-100 dark:bg-dark-800/50 rounded-xl p-4">
+                    <p class="text-xs text-gray-500 dark:text-dark-400 mb-1">Urgency</p>
                     <p
                         class="text-sm font-medium text-{{ $lead->urgency_level == 'high' ? 'red' : ($lead->urgency_level == 'medium' ? 'amber' : 'emerald') }}-400">
                         {{ ucfirst($lead->urgency_level) }}</p>
                 </div>
-                <div class="bg-dark-800/50 rounded-xl p-4">
-                    <p class="text-xs text-dark-400 mb-1">Lead Score</p>
-                    <p class="text-sm font-medium text-white">{{ $lead->lead_score }}/100</p>
+                <div class="bg-gray-100 dark:bg-dark-800/50 rounded-xl p-4">
+                    <p class="text-xs text-gray-500 dark:text-dark-400 mb-1">Lead Score</p>
+                    <p class="text-sm font-medium text-gray-900 dark:text-white">{{ $lead->lead_score }}/100</p>
                 </div>
-                <div class="bg-dark-800/50 rounded-xl p-4">
-                    <p class="text-xs text-dark-400 mb-1">Estimated Value</p>
+                <div class="bg-gray-100 dark:bg-dark-800/50 rounded-xl p-4">
+                    <p class="text-xs text-gray-500 dark:text-dark-400 mb-1">Estimated Value</p>
                     <p class="text-sm font-medium text-emerald-400">
                         {{ $lead->estimated_value ? 'Rp ' . number_format($lead->estimated_value, 0, ',', '.') : '-' }}</p>
                 </div>
-                <div class="bg-dark-800/50 rounded-xl p-4">
-                    <p class="text-xs text-dark-400 mb-1">Layanan</p>
-                    <p class="text-sm font-medium text-white">{{ $lead->service->name ?? '-' }}</p>
+                <div class="bg-gray-100 dark:bg-dark-800/50 rounded-xl p-4">
+                    <p class="text-xs text-gray-500 dark:text-dark-400 mb-1">Layanan</p>
+                    <p class="text-sm font-medium text-gray-900 dark:text-white">{{ $lead->service->name ?? '-' }}</p>
                 </div>
-                <div class="bg-dark-800/50 rounded-xl p-4">
-                    <p class="text-xs text-dark-400 mb-1">Sumber</p>
-                    <p class="text-sm font-medium text-white">{{ ucfirst($lead->source) }}</p>
+                <div class="bg-gray-100 dark:bg-dark-800/50 rounded-xl p-4">
+                    <p class="text-xs text-gray-500 dark:text-dark-400 mb-1">Sumber</p>
+                    <p class="text-sm font-medium text-gray-900 dark:text-white">{{ ucfirst($lead->source) }}</p>
                 </div>
-                <div class="bg-dark-800/50 rounded-xl p-4">
-                    <p class="text-xs text-dark-400 mb-1">Last Follow Up</p>
-                    <p class="text-sm font-medium text-white">
+                <div class="bg-gray-100 dark:bg-dark-800/50 rounded-xl p-4">
+                    <p class="text-xs text-gray-500 dark:text-dark-400 mb-1">Last Follow Up</p>
+                    <p class="text-sm font-medium text-gray-900 dark:text-white">
                         {{ $lead->last_follow_up ? $lead->last_follow_up->format('d M Y H:i') : 'Belum' }}</p>
                 </div>
-                <div class="bg-dark-800/50 rounded-xl p-4">
-                    <p class="text-xs text-dark-400 mb-1">Dibuat</p>
-                    <p class="text-sm font-medium text-white">{{ $lead->created_at->format('d M Y') }}</p>
+                <div class="bg-gray-100 dark:bg-dark-800/50 rounded-xl p-4">
+                    <p class="text-xs text-gray-500 dark:text-dark-400 mb-1">Dibuat</p>
+                    <p class="text-sm font-medium text-gray-900 dark:text-white">{{ $lead->created_at->format('d M Y') }}</p>
                 </div>
             </div>
 
             @if($lead->notes)
-                <div class="mt-6 bg-dark-800/50 rounded-xl p-4">
-                    <p class="text-xs text-dark-400 mb-2">Catatan</p>
+                <div class="mt-6 bg-gray-100 dark:bg-dark-800/50 rounded-xl p-4">
+                    <p class="text-xs text-gray-500 dark:text-dark-400 mb-2">Catatan</p>
                     <p class="text-sm text-dark-200">{{ $lead->notes }}</p>
                 </div>
             @endif

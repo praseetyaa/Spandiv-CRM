@@ -12,20 +12,20 @@
     <div class="glass rounded-2xl overflow-hidden">
         <table class="w-full">
             <thead>
-                <tr class="border-b border-dark-700/50">
-                    <th class="text-left text-xs font-medium text-dark-400 uppercase px-6 py-4">Invoice</th>
-                    <th class="text-left text-xs font-medium text-dark-400 uppercase px-6 py-4">Client</th>
-                    <th class="text-left text-xs font-medium text-dark-400 uppercase px-6 py-4">Jumlah</th>
-                    <th class="text-left text-xs font-medium text-dark-400 uppercase px-6 py-4">Metode</th>
-                    <th class="text-left text-xs font-medium text-dark-400 uppercase px-6 py-4">Tanggal</th>
-                    <th class="text-left text-xs font-medium text-dark-400 uppercase px-6 py-4">Catatan</th>
+                <tr class="border-b border-gray-200 dark:border-dark-700/50">
+                    <th class="text-left text-xs font-medium text-gray-500 dark:text-dark-400 uppercase px-6 py-4">Invoice</th>
+                    <th class="text-left text-xs font-medium text-gray-500 dark:text-dark-400 uppercase px-6 py-4">Client</th>
+                    <th class="text-left text-xs font-medium text-gray-500 dark:text-dark-400 uppercase px-6 py-4">Jumlah</th>
+                    <th class="text-left text-xs font-medium text-gray-500 dark:text-dark-400 uppercase px-6 py-4">Metode</th>
+                    <th class="text-left text-xs font-medium text-gray-500 dark:text-dark-400 uppercase px-6 py-4">Tanggal</th>
+                    <th class="text-left text-xs font-medium text-gray-500 dark:text-dark-400 uppercase px-6 py-4">Catatan</th>
                 </tr>
             </thead>
-            <tbody class="divide-y divide-dark-700/30">
+            <tbody class="divide-y divide-gray-200 dark:divide-dark-700/30">
                 @forelse($payments as $pay)
                     <tr class="table-row">
-                        <td class="px-6 py-4 text-sm font-medium text-white">{{ $pay->invoice->invoice_number }}</td>
-                        <td class="px-6 py-4 text-sm text-dark-300">{{ $pay->invoice->client->name ?? '-' }}</td>
+                        <td class="px-6 py-4 text-sm font-medium text-gray-900 dark:text-white">{{ $pay->invoice->invoice_number }}</td>
+                        <td class="px-6 py-4 text-sm text-gray-600 dark:text-dark-300">{{ $pay->invoice->client->name ?? '-' }}</td>
                         <td class="px-6 py-4 text-sm font-medium text-emerald-400">Rp
                             {{ number_format($pay->amount, 0, ',', '.') }}</td>
                         <td class="px-6 py-4">
@@ -33,15 +33,15 @@
                             <span
                                 class="px-2.5 py-1 text-xs rounded-lg bg-{{ $mColor }}-500/10 text-{{ $mColor }}-400">{{ ucfirst(str_replace('-', ' ', $pay->method)) }}</span>
                         </td>
-                        <td class="px-6 py-4 text-sm text-dark-300">{{ $pay->payment_date->format('d M Y') }}</td>
+                        <td class="px-6 py-4 text-sm text-gray-600 dark:text-dark-300">{{ $pay->payment_date->format('d M Y') }}</td>
                         <td class="px-6 py-4 text-sm text-dark-400">{{ $pay->notes ?? '-' }}</td>
                     </tr>
                 @empty <tr>
-                    <td colspan="6" class="text-center text-dark-400 py-8">Belum ada pembayaran</td>
+                    <td colspan="6" class="text-center text-gray-500 dark:text-dark-400 py-8">Belum ada pembayaran</td>
                 </tr>@endforelse
             </tbody>
         </table>
         @if($payments->hasPages())
-        <div class="px-6 py-4 border-t border-dark-700/50">{{ $payments->withQueryString()->links() }}</div>@endif
+        <div class="px-6 py-4 border-t border-gray-200 dark:border-dark-700/50">{{ $payments->withQueryString()->links() }}</div>@endif
     </div>
 @endsection

@@ -11,10 +11,10 @@
                 {{-- Invoice Info --}}
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
                     <div>
-                        <label class="block text-sm font-medium text-dark-300 mb-2">Client <span
+                        <label class="block text-sm font-medium text-gray-600 dark:text-dark-300 mb-2">Client <span
                                 class="text-red-400">*</span></label>
                         <select name="client_id" required
-                            class="w-full px-4 py-2.5 bg-dark-800/50 border border-dark-600/50 rounded-xl text-white text-sm focus:ring-2 focus:ring-blue-500/50 focus:outline-none">
+                            class="w-full px-4 py-2.5 bg-gray-100 dark:bg-dark-800/50 border border-gray-300 dark:border-dark-600/50 rounded-xl text-gray-900 dark:text-white text-sm focus:ring-2 focus:ring-blue-500/50 focus:outline-none">
                             <option value="">Pilih Client</option>
                             @foreach($clients as $c)
                                 <option value="{{ $c->id }}" {{ old('client_id') == $c->id ? 'selected' : '' }}>{{ $c->name }}
@@ -23,9 +23,9 @@
                         </select>
                     </div>
                     <div>
-                        <label class="block text-sm font-medium text-dark-300 mb-2">Project (opsional)</label>
+                        <label class="block text-sm font-medium text-gray-600 dark:text-dark-300 mb-2">Project (opsional)</label>
                         <select name="project_id"
-                            class="w-full px-4 py-2.5 bg-dark-800/50 border border-dark-600/50 rounded-xl text-white text-sm focus:ring-2 focus:ring-blue-500/50 focus:outline-none">
+                            class="w-full px-4 py-2.5 bg-gray-100 dark:bg-dark-800/50 border border-gray-300 dark:border-dark-600/50 rounded-xl text-gray-900 dark:text-white text-sm focus:ring-2 focus:ring-blue-500/50 focus:outline-none">
                             <option value="">Tidak terkait project</option>
                             @foreach($projects as $p)
                                 <option value="{{ $p->id }}" {{ old('project_id') == $p->id ? 'selected' : '' }}>{{ $p->title }}
@@ -34,9 +34,9 @@
                         </select>
                     </div>
                     <div>
-                        <label class="block text-sm font-medium text-dark-300 mb-2">Subscription (opsional)</label>
+                        <label class="block text-sm font-medium text-gray-600 dark:text-dark-300 mb-2">Subscription (opsional)</label>
                         <select name="subscription_id"
-                            class="w-full px-4 py-2.5 bg-dark-800/50 border border-dark-600/50 rounded-xl text-white text-sm focus:ring-2 focus:ring-blue-500/50 focus:outline-none">
+                            class="w-full px-4 py-2.5 bg-gray-100 dark:bg-dark-800/50 border border-gray-300 dark:border-dark-600/50 rounded-xl text-gray-900 dark:text-white text-sm focus:ring-2 focus:ring-blue-500/50 focus:outline-none">
                             <option value="">Tidak terkait subscription</option>
                             @foreach($subscriptions as $s)
                                 <option value="{{ $s->id }}" {{ old('subscription_id') == $s->id ? 'selected' : '' }}>
@@ -49,21 +49,21 @@
 
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
                     <div>
-                        <label class="block text-sm font-medium text-dark-300 mb-2">Tanggal Issue</label>
+                        <label class="block text-sm font-medium text-gray-600 dark:text-dark-300 mb-2">Tanggal Issue</label>
                         <input type="date" name="issue_date" value="{{ old('issue_date', now()->format('Y-m-d')) }}"
-                            class="w-full px-4 py-2.5 bg-dark-800/50 border border-dark-600/50 rounded-xl text-white text-sm focus:ring-2 focus:ring-blue-500/50 focus:outline-none">
+                            class="w-full px-4 py-2.5 bg-gray-100 dark:bg-dark-800/50 border border-gray-300 dark:border-dark-600/50 rounded-xl text-gray-900 dark:text-white text-sm focus:ring-2 focus:ring-blue-500/50 focus:outline-none">
                     </div>
                     <div>
-                        <label class="block text-sm font-medium text-dark-300 mb-2">Due Date</label>
+                        <label class="block text-sm font-medium text-gray-600 dark:text-dark-300 mb-2">Due Date</label>
                         <input type="date" name="due_date"
                             value="{{ old('due_date', now()->addDays(14)->format('Y-m-d')) }}"
-                            class="w-full px-4 py-2.5 bg-dark-800/50 border border-dark-600/50 rounded-xl text-white text-sm focus:ring-2 focus:ring-blue-500/50 focus:outline-none">
+                            class="w-full px-4 py-2.5 bg-gray-100 dark:bg-dark-800/50 border border-gray-300 dark:border-dark-600/50 rounded-xl text-gray-900 dark:text-white text-sm focus:ring-2 focus:ring-blue-500/50 focus:outline-none">
                     </div>
                     <div>
-                        <label class="block text-sm font-medium text-dark-300 mb-2">Status <span
+                        <label class="block text-sm font-medium text-gray-600 dark:text-dark-300 mb-2">Status <span
                                 class="text-red-400">*</span></label>
                         <select name="status" required
-                            class="w-full px-4 py-2.5 bg-dark-800/50 border border-dark-600/50 rounded-xl text-white text-sm focus:ring-2 focus:ring-blue-500/50 focus:outline-none">
+                            class="w-full px-4 py-2.5 bg-gray-100 dark:bg-dark-800/50 border border-gray-300 dark:border-dark-600/50 rounded-xl text-gray-900 dark:text-white text-sm focus:ring-2 focus:ring-blue-500/50 focus:outline-none">
                             @foreach(['draft' => 'Draft', 'sent' => 'Sent'] as $v => $l)
                                 <option value="{{ $v }}" {{ old('status', 'draft') == $v ? 'selected' : '' }}>{{ $l }}</option>
                             @endforeach
@@ -74,7 +74,7 @@
                 {{-- Line Items --}}
                 <div class="mb-8">
                     <div class="flex items-center justify-between mb-4">
-                        <h3 class="text-lg font-semibold text-white">Rincian Item</h3>
+                        <h3 class="text-lg font-semibold text-gray-900 dark:text-white">Rincian Item</h3>
                         <button type="button" onclick="addItem()"
                             class="px-4 py-2 bg-blue-600 hover:bg-blue-500 text-white text-sm rounded-xl transition-colors flex items-center gap-2">
                             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -124,7 +124,7 @@
                                 <span class="text-dark-400">PPN</span>
                                 <input type="number" name="tax_rate" value="{{ old('tax_rate', 11) }}" step="0.01" min="0"
                                     max="100" onchange="recalculate()"
-                                    class="w-20 px-2 py-1 bg-dark-800/50 border border-dark-600/50 rounded-lg text-white text-sm text-center focus:ring-2 focus:ring-blue-500/50 focus:outline-none">
+                                    class="w-20 px-2 py-1 bg-gray-100 dark:bg-dark-800/50 border border-gray-300 dark:border-dark-600/50 rounded-lg text-gray-900 dark:text-white text-sm text-center focus:ring-2 focus:ring-blue-500/50 focus:outline-none">
                                 <span class="text-dark-400">%</span>
                             </div>
                             <span class="text-white font-medium" id="taxDisplay">Rp 0</span>
@@ -133,7 +133,7 @@
                             <span class="text-dark-400">Diskon</span>
                             <input type="number" name="discount" value="{{ old('discount', 0) }}" step="1" min="0"
                                 onchange="recalculate()"
-                                class="w-36 px-3 py-1.5 bg-dark-800/50 border border-dark-600/50 rounded-lg text-white text-sm text-right focus:ring-2 focus:ring-blue-500/50 focus:outline-none">
+                                class="w-36 px-3 py-1.5 bg-gray-100 dark:bg-dark-800/50 border border-gray-300 dark:border-dark-600/50 rounded-lg text-gray-900 dark:text-white text-sm text-right focus:ring-2 focus:ring-blue-500/50 focus:outline-none">
                         </div>
                         <div class="border-t border-dark-600/50 pt-3 flex items-center justify-between">
                             <span class="text-white font-semibold text-lg">Grand Total</span>
@@ -144,9 +144,9 @@
 
                 {{-- Notes --}}
                 <div class="mb-8">
-                    <label class="block text-sm font-medium text-dark-300 mb-2">Catatan</label>
+                    <label class="block text-sm font-medium text-gray-600 dark:text-dark-300 mb-2">Catatan</label>
                     <textarea name="notes" rows="2"
-                        class="w-full px-4 py-2.5 bg-dark-800/50 border border-dark-600/50 rounded-xl text-white text-sm focus:ring-2 focus:ring-blue-500/50 focus:outline-none">{{ old('notes') }}</textarea>
+                        class="w-full px-4 py-2.5 bg-gray-100 dark:bg-dark-800/50 border border-gray-300 dark:border-dark-600/50 rounded-xl text-gray-900 dark:text-white text-sm focus:ring-2 focus:ring-blue-500/50 focus:outline-none">{{ old('notes') }}</textarea>
                 </div>
 
                 {{-- Actions --}}
@@ -155,7 +155,7 @@
                         class="px-6 py-2.5 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-500 hover:to-purple-500 text-white text-sm font-medium rounded-xl shadow-lg shadow-blue-500/20 transition-all">Buat
                         Invoice</button>
                     <a href="{{ route('invoices.index') }}"
-                        class="px-6 py-2.5 bg-dark-700 hover:bg-dark-600 text-white text-sm font-medium rounded-xl transition-colors">Batal</a>
+                        class="px-6 py-2.5 bg-gray-200 dark:bg-dark-700 hover:bg-gray-300 dark:hover:bg-dark-600 text-gray-700 dark:text-white text-sm font-medium rounded-xl transition-colors">Batal</a>
                 </div>
             </form>
         </div>
@@ -174,15 +174,15 @@
             row.innerHTML = `
                 <td class="py-3 px-2 text-sm text-dark-400 item-number"></td>
                 <td class="py-3 px-2">
-                    <input type="text" name="items[${itemIndex}][description]" value="${desc}" required placeholder="Deskripsi jasa/item..." class="w-full px-3 py-2 bg-dark-800/50 border border-dark-600/50 rounded-lg text-white text-sm focus:ring-2 focus:ring-blue-500/50 focus:outline-none">
+                    <input type="text" name="items[${itemIndex}][description]" value="${desc}" required placeholder="Deskripsi jasa/item..." class="w-full px-3 py-2 bg-gray-100 dark:bg-dark-800/50 border border-gray-300 dark:border-dark-600/50 rounded-lg text-gray-900 dark:text-white text-sm focus:ring-2 focus:ring-blue-500/50 focus:outline-none">
                 </td>
                 <td class="py-3 px-2">
-                    <input type="number" name="items[${itemIndex}][quantity]" value="${qty}" min="1" required onchange="recalculate()" class="w-full px-3 py-2 bg-dark-800/50 border border-dark-600/50 rounded-lg text-white text-sm text-center focus:ring-2 focus:ring-blue-500/50 focus:outline-none">
+                    <input type="number" name="items[${itemIndex}][quantity]" value="${qty}" min="1" required onchange="recalculate()" class="w-full px-3 py-2 bg-gray-100 dark:bg-dark-800/50 border border-gray-300 dark:border-dark-600/50 rounded-lg text-gray-900 dark:text-white text-sm text-center focus:ring-2 focus:ring-blue-500/50 focus:outline-none">
                 </td>
                 <td class="py-3 px-2">
-                    <input type="number" name="items[${itemIndex}][unit_price]" value="${price}" min="0" required step="1000" onchange="recalculate()" class="w-full px-3 py-2 bg-dark-800/50 border border-dark-600/50 rounded-lg text-white text-sm text-right focus:ring-2 focus:ring-blue-500/50 focus:outline-none">
+                    <input type="number" name="items[${itemIndex}][unit_price]" value="${price}" min="0" required step="1000" onchange="recalculate()" class="w-full px-3 py-2 bg-gray-100 dark:bg-dark-800/50 border border-gray-300 dark:border-dark-600/50 rounded-lg text-gray-900 dark:text-white text-sm text-right focus:ring-2 focus:ring-blue-500/50 focus:outline-none">
                 </td>
-                <td class="py-3 px-2 text-right text-sm text-white font-medium item-amount">Rp 0</td>
+                <td class="py-3 px-2 text-right text-sm text-gray-900 dark:text-white font-medium item-amount">Rp 0</td>
                 <td class="py-3 px-2">
                     <button type="button" onclick="removeItem(this)" class="text-dark-500 hover:text-red-400 transition-colors">
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/></svg>

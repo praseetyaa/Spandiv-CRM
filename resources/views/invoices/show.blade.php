@@ -13,7 +13,7 @@
             Download PDF
         </a>
         <a href="{{ route('invoices.edit', $invoice) }}"
-            class="px-4 py-2 bg-dark-700 hover:bg-dark-600 text-white text-sm rounded-xl transition-colors">Edit</a>
+            class="px-4 py-2 bg-gray-200 dark:bg-dark-700 hover:bg-gray-300 dark:hover:bg-dark-600 text-gray-700 dark:text-white text-sm rounded-xl transition-colors">Edit</a>
     </div>
 @endsection
 
@@ -38,11 +38,11 @@
                                 <p class="text-xs text-dark-300">Digital Agency & Creative Studio</p>
                             </div>
                         </div>
-                        <p class="text-xs text-dark-400 leading-relaxed">Indonesia<br>hello@spandiv.com</p>
+                        <p class="text-xs text-gray-500 dark:text-dark-400 leading-relaxed">Indonesia<br>hello@spandiv.com</p>
                     </div>
                     <div class="text-right">
                         <h1 class="text-3xl font-bold gradient-text mb-2">INVOICE</h1>
-                        <p class="text-sm text-white font-mono">{{ $invoice->invoice_number }}</p>
+                        <p class="text-sm text-gray-900 dark:text-white font-mono">{{ $invoice->invoice_number }}</p>
                         @php $ic = ['paid' => 'emerald', 'partial' => 'amber', 'overdue' => 'red', 'sent' => 'blue', 'draft' => 'dark'][$invoice->status] ?? 'dark'; @endphp
                         <span
                             class="inline-block mt-2 px-3 py-1 text-xs font-medium rounded-lg bg-{{ $ic }}-500/10 text-{{ $ic }}-400 border border-{{ $ic }}-500/20">{{ strtoupper($invoice->status) }}</span>
@@ -108,16 +108,16 @@
                         @forelse($invoice->items as $index => $item)
                             <tr class="border-b border-dark-700/20">
                                 <td class="py-4 text-sm text-dark-400">{{ $index + 1 }}</td>
-                                <td class="py-4 text-sm text-white">{{ $item->description }}</td>
-                                <td class="py-4 text-sm text-dark-300 text-center">{{ $item->quantity }}</td>
-                                <td class="py-4 text-sm text-dark-300 text-right">Rp
+                                <td class="py-4 text-sm text-gray-900 dark:text-white">{{ $item->description }}</td>
+                                <td class="py-4 text-sm text-gray-600 dark:text-dark-300 text-center">{{ $item->quantity }}</td>
+                                <td class="py-4 text-sm text-gray-600 dark:text-dark-300 text-right">Rp
                                     {{ number_format($item->unit_price, 0, ',', '.') }}</td>
-                                <td class="py-4 text-sm text-white font-medium text-right">Rp
+                                <td class="py-4 text-sm text-gray-900 dark:text-white font-medium text-right">Rp
                                     {{ number_format($item->amount, 0, ',', '.') }}</td>
                             </tr>
                         @empty
                             <tr>
-                                <td colspan="5" class="py-6 text-center text-dark-400 text-sm">Belum ada item rincian</td>
+                                <td colspan="5" class="py-6 text-center text-gray-500 dark:text-dark-400 text-sm">Belum ada item rincian</td>
                             </tr>
                         @endforelse
                     </tbody>
@@ -188,10 +188,10 @@
             </div>
             <div class="space-y-3">
                 @forelse($invoice->payments as $pay)
-                    <div class="bg-dark-800/50 rounded-xl p-4 flex items-center justify-between">
+                    <div class="bg-gray-100 dark:bg-dark-800/50 rounded-xl p-4 flex items-center justify-between">
                         <div>
-                            <p class="text-sm font-medium text-white">Rp {{ number_format($pay->amount, 0, ',', '.') }}</p>
-                            <p class="text-xs text-dark-400">{{ $pay->payment_date->format('d M Y') }} ·
+                            <p class="text-sm font-medium text-gray-900 dark:text-white">Rp {{ number_format($pay->amount, 0, ',', '.') }}</p>
+                            <p class="text-xs text-gray-500 dark:text-dark-400">{{ $pay->payment_date->format('d M Y') }} ·
                                 {{ ucfirst(str_replace('-', ' ', $pay->method)) }}</p>
                         </div>
                     </div>
@@ -203,7 +203,7 @@
 
         {{-- Back --}}
         <div class="mt-6">
-            <a href="{{ route('invoices.index') }}" class="text-dark-400 hover:text-white text-sm transition-colors">←
+            <a href="{{ route('invoices.index') }}" class="text-gray-400 dark:text-gray-500 dark:text-dark-400 hover:text-gray-900 dark:hover:text-white text-sm transition-colors">←
                 Kembali ke daftar invoice</a>
         </div>
     </div>
