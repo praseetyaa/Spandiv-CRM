@@ -76,8 +76,8 @@ Route::middleware('auth')->group(function () {
         Route::post('system-settings/maintenance', [SystemSettingController::class, 'toggleMaintenance'])->name('system-settings.maintenance');
         Route::post('system-settings/backup', [SystemSettingController::class, 'runBackup'])->name('system-settings.backup');
 
-        // System Update
-        Route::get('system-update', [SystemUpdateController::class, 'index'])->name('system-update.index');
+        // System Update (AJAX JSON endpoints)
+        Route::get('system-update/check', [SystemUpdateController::class, 'checkUpdate'])->name('system-update.check');
         Route::post('system-update/run', [SystemUpdateController::class, 'runUpdate'])->name('system-update.run');
     });
 });

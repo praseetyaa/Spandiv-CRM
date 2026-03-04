@@ -5,8 +5,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>@yield('title', 'Dashboard') — Spandiv CRM</title>
-    <meta name="description" content="Spandiv CRM - Internal CRM for Digital Agency">
+    <title>@yield('title', 'Dashboard') — {{ \App\Models\Setting::get('app_name', 'Spandiv CRM') }}</title>
+    <meta name="description" content="{{ \App\Models\Setting::get('app_name', 'Spandiv CRM') }} - Internal CRM">
+    @if(\App\Models\Setting::get('system_favicon'))
+        <link rel="icon" href="{{ asset(\App\Models\Setting::get('system_favicon')) }}" type="image/png">
+    @endif
 
     {{-- Apply saved theme before render to prevent flash --}}
     <script>
@@ -23,6 +26,7 @@
 
     <!-- Chart.js -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+
 
     <style>
         * {
@@ -169,16 +173,23 @@
             <!-- Logo -->
             <div class="p-6 border-b border-gray-200 dark:border-dark-700/50">
                 <div class="flex items-center gap-3">
-                    <div
-                        class="w-10 h-10 bg-gradient-to-br from-blue-500 to-purple-600 rounded-xl flex items-center justify-center shadow-lg shadow-blue-500/20">
-                        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M13 10V3L4 14h7v7l9-11h-7z" />
-                        </svg>
-                    </div>
+                    @if(\App\Models\Setting::get('system_logo'))
+                        <img src="{{ asset(\App\Models\Setting::get('system_logo')) }}" alt="Logo"
+                            class="w-10 h-10 rounded-xl object-contain">
+                    @else
+                        <div
+                            class="w-10 h-10 bg-gradient-to-br from-blue-500 to-purple-600 rounded-xl flex items-center justify-center shadow-lg shadow-blue-500/20">
+                            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M13 10V3L4 14h7v7l9-11h-7z" />
+                            </svg>
+                        </div>
+                    @endif
                     <div>
-                        <h1 class="text-lg font-bold text-gray-900 dark:text-white">Spandiv</h1>
-                        <p class="text-xs text-gray-400 dark:text-dark-400">CRM System</p>
+                        <h1 class="text-lg font-bold text-gray-900 dark:text-white">
+                            {{ \App\Models\Setting::get('app_name', 'Spandiv') }}</h1>
+                        <p class="text-xs text-gray-400 dark:text-dark-400">
+                            {{ \App\Models\Setting::get('app_tagline', 'CRM System') }}</p>
                     </div>
                 </div>
             </div>
