@@ -41,12 +41,18 @@ class InvoiceController extends Controller
         return view('invoices.index', compact('invoices'));
     }
 
-    public function create()
+    public function create(Request $request)
     {
         $clients = Client::active()->get();
         $projects = Project::all();
         $subscriptions = Subscription::active()->get();
-        return view('invoices.create', compact('clients', 'projects', 'subscriptions'));
+        $prefill = [
+            'client_id' => $request->query('client_id'),
+            'project_id' => $request->query('project_id'),
+            'item_desc' => $request->query('item_desc'),
+            'item_price' => $request->query('item_price'),
+        ];
+        return view('invoices.create', compact('clients', 'projects', 'subscriptions', 'prefill'));
     }
 
     public function store(Request $request)

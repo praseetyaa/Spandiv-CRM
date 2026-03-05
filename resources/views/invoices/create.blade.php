@@ -17,24 +17,26 @@
                             class="w-full px-4 py-2.5 bg-gray-100 dark:bg-dark-800/50 border border-gray-300 dark:border-dark-600/50 rounded-xl text-gray-900 dark:text-white text-sm focus:ring-2 focus:ring-blue-500/50 focus:outline-none">
                             <option value="">Pilih Client</option>
                             @foreach($clients as $c)
-                                <option value="{{ $c->id }}" {{ old('client_id') == $c->id ? 'selected' : '' }}>{{ $c->name }}
+                                <option value="{{ $c->id }}" {{ old('client_id', $prefill['client_id'] ?? '') == $c->id ? 'selected' : '' }}>{{ $c->name }}
                                 </option>
                             @endforeach
                         </select>
                     </div>
                     <div>
-                        <label class="block text-sm font-medium text-gray-600 dark:text-dark-300 mb-2">Project (opsional)</label>
+                        <label class="block text-sm font-medium text-gray-600 dark:text-dark-300 mb-2">Project
+                            (opsional)</label>
                         <select name="project_id"
                             class="w-full px-4 py-2.5 bg-gray-100 dark:bg-dark-800/50 border border-gray-300 dark:border-dark-600/50 rounded-xl text-gray-900 dark:text-white text-sm focus:ring-2 focus:ring-blue-500/50 focus:outline-none">
                             <option value="">Tidak terkait project</option>
                             @foreach($projects as $p)
-                                <option value="{{ $p->id }}" {{ old('project_id') == $p->id ? 'selected' : '' }}>{{ $p->title }}
+                                <option value="{{ $p->id }}" {{ old('project_id', $prefill['project_id'] ?? '') == $p->id ? 'selected' : '' }}>{{ $p->title }}
                                 </option>
                             @endforeach
                         </select>
                     </div>
                     <div>
-                        <label class="block text-sm font-medium text-gray-600 dark:text-dark-300 mb-2">Subscription (opsional)</label>
+                        <label class="block text-sm font-medium text-gray-600 dark:text-dark-300 mb-2">Subscription
+                            (opsional)</label>
                         <select name="subscription_id"
                             class="w-full px-4 py-2.5 bg-gray-100 dark:bg-dark-800/50 border border-gray-300 dark:border-dark-600/50 rounded-xl text-gray-900 dark:text-white text-sm focus:ring-2 focus:ring-blue-500/50 focus:outline-none">
                             <option value="">Tidak terkait subscription</option>
@@ -172,23 +174,23 @@
             row.className = 'border-b border-dark-700/30 item-row';
             row.dataset.index = itemIndex;
             row.innerHTML = `
-                <td class="py-3 px-2 text-sm text-dark-400 item-number"></td>
-                <td class="py-3 px-2">
-                    <input type="text" name="items[${itemIndex}][description]" value="${desc}" required placeholder="Deskripsi jasa/item..." class="w-full px-3 py-2 bg-gray-100 dark:bg-dark-800/50 border border-gray-300 dark:border-dark-600/50 rounded-lg text-gray-900 dark:text-white text-sm focus:ring-2 focus:ring-blue-500/50 focus:outline-none">
-                </td>
-                <td class="py-3 px-2">
-                    <input type="number" name="items[${itemIndex}][quantity]" value="${qty}" min="1" required onchange="recalculate()" class="w-full px-3 py-2 bg-gray-100 dark:bg-dark-800/50 border border-gray-300 dark:border-dark-600/50 rounded-lg text-gray-900 dark:text-white text-sm text-center focus:ring-2 focus:ring-blue-500/50 focus:outline-none">
-                </td>
-                <td class="py-3 px-2">
-                    <input type="number" name="items[${itemIndex}][unit_price]" value="${price}" min="0" required step="1000" onchange="recalculate()" class="w-full px-3 py-2 bg-gray-100 dark:bg-dark-800/50 border border-gray-300 dark:border-dark-600/50 rounded-lg text-gray-900 dark:text-white text-sm text-right focus:ring-2 focus:ring-blue-500/50 focus:outline-none">
-                </td>
-                <td class="py-3 px-2 text-right text-sm text-gray-900 dark:text-white font-medium item-amount">Rp 0</td>
-                <td class="py-3 px-2">
-                    <button type="button" onclick="removeItem(this)" class="text-dark-500 hover:text-red-400 transition-colors">
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/></svg>
-                    </button>
-                </td>
-            `;
+                    <td class="py-3 px-2 text-sm text-dark-400 item-number"></td>
+                    <td class="py-3 px-2">
+                        <input type="text" name="items[${itemIndex}][description]" value="${desc}" required placeholder="Deskripsi jasa/item..." class="w-full px-3 py-2 bg-gray-100 dark:bg-dark-800/50 border border-gray-300 dark:border-dark-600/50 rounded-lg text-gray-900 dark:text-white text-sm focus:ring-2 focus:ring-blue-500/50 focus:outline-none">
+                    </td>
+                    <td class="py-3 px-2">
+                        <input type="number" name="items[${itemIndex}][quantity]" value="${qty}" min="1" required onchange="recalculate()" class="w-full px-3 py-2 bg-gray-100 dark:bg-dark-800/50 border border-gray-300 dark:border-dark-600/50 rounded-lg text-gray-900 dark:text-white text-sm text-center focus:ring-2 focus:ring-blue-500/50 focus:outline-none">
+                    </td>
+                    <td class="py-3 px-2">
+                        <input type="number" name="items[${itemIndex}][unit_price]" value="${price}" min="0" required step="1000" onchange="recalculate()" class="w-full px-3 py-2 bg-gray-100 dark:bg-dark-800/50 border border-gray-300 dark:border-dark-600/50 rounded-lg text-gray-900 dark:text-white text-sm text-right focus:ring-2 focus:ring-blue-500/50 focus:outline-none">
+                    </td>
+                    <td class="py-3 px-2 text-right text-sm text-gray-900 dark:text-white font-medium item-amount">Rp 0</td>
+                    <td class="py-3 px-2">
+                        <button type="button" onclick="removeItem(this)" class="text-dark-500 hover:text-red-400 transition-colors">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/></svg>
+                        </button>
+                    </td>
+                `;
             tbody.appendChild(row);
             itemIndex++;
             renumberItems();
@@ -229,7 +231,7 @@
             document.getElementById('totalDisplay').textContent = 'Rp ' + new Intl.NumberFormat('id-ID').format(Math.round(total));
         }
 
-        // Initialize with one empty row
-        addItem();
+        // Initialize with prefilled or empty row
+        addItem({!! json_encode($prefill['item_desc'] ?? '') !!}, 1, {!! json_encode($prefill['item_price'] ?? 0) !!});
     </script>
 @endpush
