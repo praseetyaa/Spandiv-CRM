@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
+    <meta name="robots" content="noindex, nofollow">
     <title>@yield('title', 'Dashboard') — {{ \App\Models\Setting::get('app_name', 'Spandiv CRM') }}</title>
     <meta name="description" content="{{ \App\Models\Setting::get('app_name', 'Spandiv CRM') }} - Internal CRM">
     @if(\App\Models\Setting::get('system_favicon'))
@@ -187,9 +188,11 @@
                     @endif
                     <div>
                         <h1 class="text-lg font-bold text-gray-900 dark:text-white">
-                            {{ \App\Models\Setting::get('app_name', 'Spandiv') }}</h1>
+                            {{ \App\Models\Setting::get('app_name', 'Spandiv') }}
+                        </h1>
                         <p class="text-xs text-gray-400 dark:text-dark-400">
-                            {{ \App\Models\Setting::get('app_tagline', 'CRM System') }}</p>
+                            {{ \App\Models\Setting::get('app_tagline', 'CRM System') }}
+                        </p>
                     </div>
                 </div>
             </div>
@@ -286,6 +289,24 @@
                 <p
                     class="text-xs text-gray-400 dark:text-dark-500 uppercase tracking-wider font-semibold mt-6 mb-3 px-4">
                     Sistem</p>
+
+                <a href="{{ route('admin.requirements.index') }}"
+                    class="nav-link nav-icon-animated flex items-center gap-3 px-4 py-2.5 rounded-lg text-sm {{ request()->routeIs('admin.requirements.*') ? 'active' : 'text-gray-600 dark:text-dark-300 hover:text-gray-900 dark:hover:text-white' }}">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                            d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
+                    </svg>
+                    Requirements
+                </a>
+
+                <a href="{{ route('requirement-fields.index') }}"
+                    class="nav-link nav-icon-animated flex items-center gap-3 px-4 py-2.5 rounded-lg text-sm {{ request()->routeIs('requirement-fields.*') ? 'active' : 'text-gray-600 dark:text-dark-300 hover:text-gray-900 dark:hover:text-white' }}">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                            d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+                    </svg>
+                    Form Builder
+                </a>
 
                 <a href="{{ route('activities.index') }}"
                     class="nav-link nav-icon-animated flex items-center gap-3 px-4 py-2.5 rounded-lg text-sm {{ request()->routeIs('activities.*') ? 'active' : 'text-gray-600 dark:text-dark-300 hover:text-gray-900 dark:hover:text-white' }}">

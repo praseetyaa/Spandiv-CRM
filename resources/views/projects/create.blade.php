@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('title', isset($project) ? 'Edit Project' : 'Tambah Project')
 @section('content')
-    <div class="max-w-3xl">
+    <div class="">
         <div class="glass rounded-2xl p-8">
             <form method="POST"
                 action="{{ isset($project) ? route('projects.update', $project) : route('projects.store') }}"

@@ -15,6 +15,10 @@ use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\SystemSettingController;
 use App\Http\Controllers\SystemUpdateController;
+use App\Http\Controllers\PublicRequirementController;
+use App\Http\Controllers\RequirementFieldController;
+use App\Http\Controllers\AdminRequirementController;
+
 // Auth Routes
 Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [LoginController::class, 'login']);
@@ -24,6 +28,19 @@ Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 Route::get('/', function () {
     return redirect('/dashboard');
 });
+
+// ── Public Requirement Form (no auth, unique per company) ──
+Route::get('/requirements/{formSlug}', [PublicRequirementController::class, 'showForm'])
+    ->middleware('throttle:30,1')
+    ->name('requirements.form');
+Route::post('/requirements/{formSlug}', [PublicRequirementController::class, 'submit'])
+    ->middleware('throttle:5,60')
+    ->name('requirements.submit');
+Route::get('/requirements/{formSlug}/thank-you', [PublicRequirementController::class, 'thankYou'])
+    ->name('requirements.thank-you');
+Route::get('/api/requirement-fields/{formSlug}/{category}', [PublicRequirementController::class, 'getFieldsByCategory'])
+    ->middleware('throttle:60,1')
+    ->name('api.requirement-fields');
 
 // Protected Routes
 Route::middleware('auth')->group(function () {
@@ -61,6 +78,15 @@ Route::middleware('auth')->group(function () {
     // Activities
     Route::get('/activities', [ActivityController::class, 'index'])->name('activities.index');
 
+    // ── Form Builder & Requirements Admin ────────────────
+    Route::resource('requirement-fields', RequirementFieldController::class)->except(['show']);
+    Route::post('requirement-fields/reorder', [RequirementFieldController::class, 'reorder'])->name('requirement-fields.reorder');
+
+    Route::get('admin/requirements', [AdminRequirementController::class, 'index'])->name('admin.requirements.index');
+    Route::get('admin/requirements/{requirement}', [AdminRequirementController::class, 'show'])->name('admin.requirements.show');
+    Route::post('admin/requirements/{requirement}/convert', [AdminRequirementController::class, 'convertToLead'])->name('admin.requirements.convert');
+    Route::delete('admin/requirements/{requirement}', [AdminRequirementController::class, 'destroy'])->name('admin.requirements.destroy');
+
     // User Management (admin & superadmin)
     Route::middleware('role:superadmin,admin')->group(function () {
         Route::resource('users', UserController::class)->except(['show']);
@@ -82,3 +108,4 @@ Route::middleware('auth')->group(function () {
         Route::post('system-update/run', [SystemUpdateController::class, 'runUpdate'])->name('system-update.run');
     });
 });
+

@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('title', 'Detail Project')
 @section('content')
-    <div class="max-w-5xl">
+    <div class="">
         <div class="glass rounded-2xl p-8 mb-6">
             <div class="flex items-start justify-between mb-6">
                 <div>
@@ -64,7 +64,8 @@
                             <h4 class="text-base font-bold text-gray-900 dark:text-white">Project Selesai! 🎉</h4>
                             <p class="text-sm text-gray-500 dark:text-dark-400 mt-0.5">Buat invoice untuk project ini senilai
                                 <span class="text-emerald-400 font-medium">Rp
-                                    {{ number_format($project->price, 0, ',', '.') }}</span></p>
+                                    {{ number_format($project->price, 0, ',', '.') }}</span>
+                            </p>
                         </div>
                     </div>
                     <a href="{{ route('invoices.create', ['project_id' => $project->id, 'client_id' => $project->client_id, 'item_desc' => $project->title, 'item_price' => $project->price]) }}"
@@ -84,7 +85,7 @@
                             @foreach($project->invoices as $inv)
                                 <a href="{{ route('invoices.show', $inv) }}"
                                     class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-gray-100 dark:bg-dark-800/50 hover:bg-gray-200 dark:hover:bg-dark-700 rounded-lg text-xs font-medium transition-colors
-                                                        {{ $inv->status === 'paid' ? 'text-emerald-400' : ($inv->status === 'overdue' ? 'text-red-400' : 'text-gray-600 dark:text-dark-300') }}">
+                                                                        {{ $inv->status === 'paid' ? 'text-emerald-400' : ($inv->status === 'overdue' ? 'text-red-400' : 'text-gray-600 dark:text-dark-300') }}">
                                     <span>{{ $inv->invoice_number }}</span>
                                     <span
                                         class="px-1.5 py-0.5 rounded text-[10px] bg-{{ $inv->status === 'paid' ? 'emerald' : ($inv->status === 'overdue' ? 'red' : 'gray') }}-500/10">

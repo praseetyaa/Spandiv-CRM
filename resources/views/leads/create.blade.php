@@ -2,7 +2,7 @@
 @section('title', isset($lead) ? 'Edit Lead' : 'Tambah Lead')
 
 @section('content')
-    <div class="max-w-3xl">
+    <div class="">
         {{-- Won Status Info Alert --}}
         @if(isset($lead) && $lead->isWon() && $lead->canConvert())
             <div class="mb-6 p-4 bg-emerald-500/10 border border-emerald-500/20 rounded-xl flex items-center gap-3">

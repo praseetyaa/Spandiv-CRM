@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('title', isset($service) ? 'Edit Layanan' : 'Tambah Layanan')
 @section('content')
-    <div class="max-w-2xl">
+    <div class="">
         <div class="glass rounded-2xl p-8">
             <form method="POST"
                 action="{{ isset($service) ? route('services.update', $service) : route('services.store') }}"
@@ -36,7 +36,8 @@
                         value="{{ old('base_price', $service->base_price ?? '') }}" required
                         class="w-full px-4 py-2.5 bg-gray-100 dark:bg-dark-800/50 border border-gray-300 dark:border-dark-600/50 rounded-xl text-gray-900 dark:text-white text-sm focus:ring-2 focus:ring-blue-500/50 focus:outline-none">
                 </div>
-                <div><label class="block text-sm font-medium text-gray-600 dark:text-dark-300 mb-2">Deskripsi</label><textarea
+                <div><label
+                        class="block text-sm font-medium text-gray-600 dark:text-dark-300 mb-2">Deskripsi</label><textarea
                         name="description" rows="3"
                         class="w-full px-4 py-2.5 bg-gray-100 dark:bg-dark-800/50 border border-gray-300 dark:border-dark-600/50 rounded-xl text-gray-900 dark:text-white text-sm focus:ring-2 focus:ring-blue-500/50 focus:outline-none">{{ old('description', $service->description ?? '') }}</textarea>
                 </div>

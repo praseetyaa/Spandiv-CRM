@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('title', isset($client) ? 'Edit Client' : 'Tambah Client')
 @section('content')
-    <div class="max-w-3xl">
+    <div class="">
         <div class="glass rounded-2xl p-8">
             <form method="POST" action="{{ isset($client) ? route('clients.update', $client) : route('clients.store') }}"
                 class="space-y-6">
@@ -33,12 +33,14 @@
                             value="{{ old('industry', $client->industry ?? '') }}" required
                             class="w-full px-4 py-2.5 bg-gray-100 dark:bg-dark-800/50 border border-gray-300 dark:border-dark-600/50 rounded-xl text-gray-900 dark:text-white text-sm focus:ring-2 focus:ring-blue-500/50 focus:outline-none"
                             placeholder="F&B, Fashion, Teknologi..."></div>
-                    <div><label class="block text-sm font-medium text-gray-600 dark:text-dark-300 mb-2">Instagram</label><input type="text"
-                            name="instagram" value="{{ old('instagram', $client->instagram ?? '') }}"
+                    <div><label
+                            class="block text-sm font-medium text-gray-600 dark:text-dark-300 mb-2">Instagram</label><input
+                            type="text" name="instagram" value="{{ old('instagram', $client->instagram ?? '') }}"
                             class="w-full px-4 py-2.5 bg-gray-100 dark:bg-dark-800/50 border border-gray-300 dark:border-dark-600/50 rounded-xl text-gray-900 dark:text-white text-sm focus:ring-2 focus:ring-blue-500/50 focus:outline-none"
                             placeholder="@username"></div>
-                    <div><label class="block text-sm font-medium text-gray-600 dark:text-dark-300 mb-2">Website</label><input type="url"
-                            name="website" value="{{ old('website', $client->website ?? '') }}"
+                    <div><label
+                            class="block text-sm font-medium text-gray-600 dark:text-dark-300 mb-2">Website</label><input
+                            type="url" name="website" value="{{ old('website', $client->website ?? '') }}"
                             class="w-full px-4 py-2.5 bg-gray-100 dark:bg-dark-800/50 border border-gray-300 dark:border-dark-600/50 rounded-xl text-gray-900 dark:text-white text-sm focus:ring-2 focus:ring-blue-500/50 focus:outline-none"
                             placeholder="https://..."></div>
                     <div><label class="block text-sm font-medium text-gray-600 dark:text-dark-300 mb-2">Status <span

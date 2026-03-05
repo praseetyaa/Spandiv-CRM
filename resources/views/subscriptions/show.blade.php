@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('title', 'Detail Subscription')
 @section('content')
-    <div class="max-w-4xl">
+    <div class="">
         <div class="glass rounded-2xl p-8 mb-6">
             <div class="flex items-start justify-between mb-6">
                 <div>

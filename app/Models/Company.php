@@ -10,13 +10,16 @@ class Company extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name', 'slug', 'email', 'phone', 'address', 'logo'];
+    protected $fillable = ['name', 'slug', 'form_slug', 'email', 'phone', 'address', 'logo'];
 
     protected static function booted(): void
     {
         static::creating(function (Company $company) {
             if (empty($company->slug)) {
                 $company->slug = Str::slug($company->name);
+            }
+            if (empty($company->form_slug)) {
+                $company->form_slug = Str::random(12);
             }
         });
     }
@@ -56,5 +59,13 @@ class Company extends Model
     public function activities()
     {
         return $this->hasMany(Activity::class);
+    }
+    public function requirementFields()
+    {
+        return $this->hasMany(RequirementField::class);
+    }
+    public function clientRequirements()
+    {
+        return $this->hasMany(ClientRequirement::class);
     }
 }
