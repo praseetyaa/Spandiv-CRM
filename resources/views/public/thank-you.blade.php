@@ -6,6 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="robots" content="noindex, nofollow">
     <title>Terima Kasih — {{ $company->name }}</title>
+    @if(isset($company) && $company->logo)
+        <link rel="icon" href="{{ asset($company->logo) }}" type="image/png">
+    @elseif(\App\Models\Setting::get('system_favicon'))
+        <link rel="icon" href="{{ asset(\App\Models\Setting::get('system_favicon')) }}" type="image/png">
+    @else
+        <link rel="icon" href="{{ asset('favicon.ico') }}" type="image/x-icon">
+    @endif
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
         rel="stylesheet">

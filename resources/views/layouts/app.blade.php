@@ -10,6 +10,8 @@
     <meta name="description" content="{{ \App\Models\Setting::get('app_name', 'Spandiv CRM') }} - Internal CRM">
     @if(\App\Models\Setting::get('system_favicon'))
         <link rel="icon" href="{{ asset(\App\Models\Setting::get('system_favicon')) }}" type="image/png">
+    @else
+        <link rel="icon" href="{{ asset('favicon.ico') }}" type="image/x-icon">
     @endif
 
     {{-- Apply saved theme before render to prevent flash --}}
