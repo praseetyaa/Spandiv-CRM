@@ -27,8 +27,14 @@ class PaymentController extends Controller
 
     public function create(Request $request)
     {
-        $invoices = Invoice::unpaid()->with('client')->get();
-        $selectedInvoice = $request->invoice_id ? Invoice::find($request->invoice_id) : null;
+        // Show all invoices that are not fully paid (including draft, sent, partial, overdue)
+        $invoices = Invoice::where('status', '!=', 'paid')
+            ->with('client')
+            ->latest()
+            ->get();
+
+        $selectedInvoice = $request->invoice_id ? Invoice::with('client')->find($request->invoice_id) : null;
+
         return view('payments.create', compact('invoices', 'selectedInvoice'));
     }
 
