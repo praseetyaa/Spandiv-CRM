@@ -15,7 +15,7 @@ class LeadController extends Controller
 
     public function index(Request $request)
     {
-        $query = Lead::with(['service', 'company']);
+        $query = Lead::with(['service', 'company', 'client']);
 
         if ($request->filled('status')) {
             $query->where('status', $request->status);
@@ -95,6 +95,49 @@ class LeadController extends Controller
         $this->leadService->updateLead($lead, $validated);
 
         return redirect()->route('leads.index')->with('success', 'Lead berhasil diupdate!');
+    }
+
+    public function convert(Request $request, Lead $lead)
+    {
+        // Validate that lead hasn't been converted yet
+        if ($lead->client) {
+            return redirect()->route('leads.show', $lead)
+                ->with('error', 'Lead ini sudah dikonversi menjadi client!');
+        }
+
+        $validated = $request->validate([
+            'client_name' => 'required|string|max:255',
+            'client_phone' => 'required|string|max:20',
+            'client_email' => 'nullable|email|max:255',
+            'business_name' => 'required|string|max:255',
+            'industry' => 'required|string|max:255',
+            'instagram' => 'nullable|string|max:255',
+            'website' => 'nullable|url|max:255',
+            // Project fields
+            'create_project' => 'nullable|boolean',
+            'project_title' => 'required_if:create_project,1|nullable|string|max:255',
+            'project_start_date' => 'required_if:create_project,1|nullable|date',
+            'project_deadline' => 'required_if:create_project,1|nullable|date|after_or_equal:project_start_date',
+            'project_description' => 'nullable|string',
+            // Subscription fields
+            'create_subscription' => 'nullable|boolean',
+            'billing_cycle' => 'required_if:create_subscription,1|nullable|in:monthly,quarterly,yearly',
+            'subscription_start_date' => 'required_if:create_subscription,1|nullable|date',
+            'subscription_end_date' => 'required_if:create_subscription,1|nullable|date|after:subscription_start_date',
+        ]);
+
+        $result = $this->leadService->convertLead($lead, $validated);
+
+        $message = "Lead berhasil dikonversi menjadi Client: {$result['client']->name}";
+        if ($result['project']) {
+            $message .= " + Project: {$result['project']->title}";
+        }
+        if ($result['subscription']) {
+            $message .= " + Subscription aktif";
+        }
+
+        return redirect()->route('clients.show', $result['client'])
+            ->with('success', $message);
     }
 
     public function destroy(Lead $lead)

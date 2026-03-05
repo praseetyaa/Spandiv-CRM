@@ -41,6 +41,16 @@ class Lead extends Model
         return $this->hasOne(Client::class);
     }
 
+    public function isWon(): bool
+    {
+        return $this->status === 'closed_won';
+    }
+
+    public function canConvert(): bool
+    {
+        return $this->isWon() && !$this->client;
+    }
+
     public function scopeNew($query)
     {
         return $query->where('status', 'new');

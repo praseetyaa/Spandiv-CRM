@@ -119,6 +119,24 @@
                             </td>
                             <td class="px-6 py-4 text-right">
                                 <div class="flex items-center justify-end gap-2">
+                                    {{-- Convert Button (only for Won leads without client) --}}
+                                    @if($lead->canConvert())
+                                    <a href="{{ route('leads.show', $lead) }}"
+                                        class="p-1.5 text-emerald-400 hover:text-emerald-300 transition-colors relative group" title="Convert to Client">
+                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                                        </svg>
+                                        <span class="absolute -top-1 -right-1 w-2 h-2 bg-emerald-400 rounded-full animate-ping"></span>
+                                        <span class="absolute -top-1 -right-1 w-2 h-2 bg-emerald-400 rounded-full"></span>
+                                    </a>
+                                    @elseif($lead->isWon() && $lead->client)
+                                    <a href="{{ route('clients.show', $lead->client) }}"
+                                        class="p-1.5 text-emerald-400/50 transition-colors" title="Sudah dikonversi">
+                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                                        </svg>
+                                    </a>
+                                    @endif
                                     @if($lead->phone)
                                     <a href="https://wa.me/{{ preg_replace('/^0/', '62', preg_replace('/[^0-9]/', '', $lead->phone)) }}" target="_blank"
                                         class="p-1.5 text-gray-400 dark:text-dark-400 hover:text-emerald-400 transition-colors" title="WhatsApp">
